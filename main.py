@@ -29,9 +29,11 @@ time.sleep(0.5)
 
 # Copy
 pyautogui.hotkey('ctrl', 'c')
+pyautogui.click(1760, 845)
 
 # Wait for clipboard
 time.sleep(0.5)
+
 
 # Read clipboard
 copied_text = pyperclip.paste()
