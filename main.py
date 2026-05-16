@@ -3,24 +3,14 @@ import pyperclip
 import time
 from google import genai
 
-# =====================================
-# GEMINI CLIENT
-# =====================================
 
 client = genai.Client(
     api_key="AIzaSyCOGjsxDQyqNAjAcVI-_rkpBDSsU27Rf88"
 )
 
-# =====================================
-# MEMORY
-# =====================================
 
 last_processed_message = ""
 last_ai_reply = ""
-
-# =====================================
-# LOOP
-# =====================================
 
 while True:
 
@@ -28,9 +18,7 @@ while True:
 
         print("\nChecking messages...\n")
 
-        # =====================================
-        # SELECT CHAT AREA
-        # =====================================
+
 
         start_x, start_y = 556, 121
         end_x, end_y = 915, 1008
@@ -45,9 +33,8 @@ while True:
 
         time.sleep(0.2)
 
-        # =====================================
+
         # COPY CHAT
-        # =====================================
 
         pyautogui.hotkey('ctrl', 'c')
 
@@ -58,13 +45,10 @@ while True:
         # Deselect
         pyautogui.click(968, 910)
 
-        # =====================================
-        # CLEAN TEXT
-        # =====================================
 
         lines = copied_text.split("\n")
 
-        # Remove empty garbage lines
+
         lines = [line.strip() for line in lines if line.strip()]
 
         if len(lines) == 0:
@@ -72,9 +56,6 @@ while True:
             time.sleep(5)
             continue
 
-        # =====================================
-        # FIND LAST VALID MESSAGE
-        # =====================================
 
         latest_message = ""
 
@@ -106,9 +87,7 @@ while True:
 
         print("Latest Message:", latest_message)
 
-        # =====================================
         # DUPLICATE CHECK
-        # =====================================
 
         if latest_message == last_processed_message:
             print("Already processed")
@@ -117,10 +96,6 @@ while True:
 
         # Save immediately
         last_processed_message = latest_message
-
-        # =====================================
-        # GEMINI PROMPT
-        # =====================================
 
         prompt = f"""
 Reply naturally to this Instagram DM.
@@ -138,10 +113,6 @@ Message:
 {latest_message}
 """
 
-        # =====================================
-        # GENERATE RESPONSE
-        # =====================================
-
         response = client.models.generate_content(
             model="gemini-3.1-flash-lite",
             contents=prompt
@@ -158,9 +129,6 @@ Message:
         # Save AI reply
         last_ai_reply = reply
 
-        # =====================================
-        # SEND MESSAGE
-        # =====================================
 
         pyperclip.copy(reply)
 
