@@ -40,3 +40,45 @@ copied_text = pyperclip.paste()
 
 print("Copied Text:\n")
 print(copied_text)
+
+
+
+from google import genai
+# =========================
+# STEP 2: GEMINI AI
+# =========================
+
+client = genai.Client(
+    api_key="AIzaSyCOGjsxDQyqNAjAcVI-_rkpBDSsU27Rf88"
+)
+
+prompt = f"""
+You are Vaibhav, an engineering student.
+
+Analyze the following WhatsApp chat carefully.
+
+Understand:
+- context
+- emotions
+- conversation flow
+- relationship tone
+
+Then generate a natural human-like reply.
+
+Chat History:
+{copied_text}
+"""
+
+try:
+    response = client.models.generate_content(
+        model="gemini-3.1-flash-lite",
+        contents=prompt
+    )
+
+    print(response.text)
+
+except Exception as e:
+    print("Error:", e)
+
+# print("\nAI Reply:\n")
+# print(response.text)
