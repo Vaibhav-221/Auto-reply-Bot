@@ -145,7 +145,6 @@ Message:
 
         print("Reply Sent")
 
-        # Cooldown after sending
         time.sleep(8)
 
     except Exception as e:
