@@ -5,7 +5,7 @@ from google import genai
 
 
 client = genai.Client(
-    api_key="AIzaSyCOGjsxDQyqNAjAcVI-_rkpBDSsU27Rf88"
+    api_key="something confidential"
 )
 
 
